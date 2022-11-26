@@ -6,5 +6,4 @@ set hls
 set clipboard=unnamedplus
 nnoremap S :%s//g<Left><Left>
 set viminfofile=$XDG_STATE_HOME/vim/viminfo
-
 set bg=light
