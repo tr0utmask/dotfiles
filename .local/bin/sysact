@@ -1,0 +1,20 @@
+#!/bin/sh
+
+choice="$(printf "Lock screen\nExit dwm\nRenew dwm\nReboot\nShutdown\nSuspend" | dmenu -i)"
+
+case "$choice" in
+	"Lock screen")
+		slock ;;
+	"Exit dwm")
+		kill "$(pidof Xorg)" ;;
+	"Renew dwm")
+		kill "$(pidof dwm)" ;;
+	"Reboot")
+		systemctl reboot ;;
+	"Shutdown")
+		systemctl poweroff ;;
+	"Suspend")
+		slock systemctl suspend ;;
+	"*")
+		exit ;;
+esac

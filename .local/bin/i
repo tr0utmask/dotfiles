@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+bat_dir=/sys/class/power_supply/BAT0
+
+read -r capacity < "$bat_dir/capacity"
+read -r status   < "$bat_dir/status"
+
+dt="$(date "+%d.%m.%+4Y %H:%M")"
+
+printf '%s%% [%s]\n%s\n' "$capacity" "$status" "$dt"

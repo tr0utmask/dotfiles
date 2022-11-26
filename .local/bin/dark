@@ -1,0 +1,70 @@
+#!/bin/sh
+
+if grep -q "444444" ~/.local/src/dwm/config.h
+then
+
+	# Send notification
+	notify-send "Switching to light mode..."
+
+	# Compile light dwm
+	sed -i 's/static\ const\ char\ col_cyan\[\]\ \ \ \ \ \ \ \ =\ \"#444444\";/static\ const\ char\ col_cyan\[\]\ \ \ \ \ \ \ \ =\ \"#000000\";/' ~/.local/src/dwm/config.h && cd ~/.local/src/dwm/ && sudo make clean install > /dev/null 2>&1
+
+	# Change Xresources
+	sed -i 's/ffffff/000000/g; s/161616/ffffff/g' ~/.config/Xresources
+	xrdb ~/.config/Xresources
+
+	# Change dunst config and restart
+	sed -i 's/444444/000000/g; s/ffffff/000000/g; s/161616/ffffff/g' ~/.config/dunst/dunstrc
+	kill "$(pidof dunst)"
+	setsid -f dunst
+
+	# Change GTK theme
+	sed -i '/dark-theme/d' ~/.config/gtk-3.0/settings.ini
+	sed -i 's/gtk-theme-name=Adwaita-dark/gtk-theme-name=Industrial/' ~/.config/gtk-3.0/settings.ini
+
+	# Change vim theme
+	sed -i 's/dark/light/g' ~/.vim/vimrc
+
+	# Change .xinitrc
+	sed -i 's/333333/AAAAAA/' ~/.xinitrc
+
+	# Set background to gray
+	xsetroot -solid "#AAAAAA"
+
+	# Restart dwm
+	kill -HUP "$(pidof -s dwm)"
+
+else
+
+	# Send notification
+	notify-send "Switching to dark mode..."
+
+	# Compile dark dwm
+	sed -i 's/static\ const\ char\ col_cyan\[\]\ \ \ \ \ \ \ \ =\ \"#000000\";/static\ const\ char\ col_cyan\[\]\ \ \ \ \ \ \ \ =\ \"#444444\";/' ~/.local/src/dwm/config.h && cd ~/.local/src/dwm/ && sudo make clean install > /dev/null 2>&1
+
+	# Change Xresources
+	sed -i 's/ffffff/161616/g; s/000000/ffffff/g' ~/.config/Xresources
+	xrdb ~/.config/Xresources
+
+	# Change dunst config and restart
+	sed -i 's/frame_color\ =\ "#000000"/frame_color\ =\ "#444444"/; s/background\ =\ "#ffffff"/background\ =\ "#161616"/g; s/000000/ffffff/g' ~/.config/dunst/dunstrc
+	kill "$(pidof dunst)"
+	setsid -f dunst
+
+	# Change GTK theme
+	sed -i '2i gtk-application-prefer-dark-theme=true' ~/.config/gtk-3.0/settings.ini
+	sed -i 's/Industrial/Adwaita-dark/' ~/.config/gtk-3.0/settings.ini
+
+	# Change vim theme
+	sed -i 's/light/dark/g' ~/.vim/vimrc
+
+	# Change .xinitrc
+	sed -i 's/AAAAAA/333333/' ~/.xinitrc
+
+	# Change background to dark gray
+	xsetroot -solid "#333333"
+
+	# Restart dwm
+	kill "$(pidof dwm)"
+
+fi

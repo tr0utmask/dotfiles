@@ -1,0 +1,12 @@
+#!/bin/sh
+
+printf "Length for username: "
+read -r username_length
+
+printf "Length for password: "
+read -r password_length
+
+echo "$username_length$password_length" | grep -q "[^0-9 ]" && echo "Input must be whole numbers." && exit
+
+echo "Username: $(</dev/urandom tr -dc '[:alnum:]' | head -c "$username_length"; echo "")"
+echo "Password: $(</dev/urandom tr -dc '[:alnum:]!@#$%^&*' | head -c "$password_length"; echo "")"

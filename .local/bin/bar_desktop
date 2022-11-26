@@ -1,0 +1,10 @@
+#!/bin/sh
+
+while :
+do
+
+	xsetroot -name "$(pulsemixer --get-volume | awk '{ print $1 }')dB | $(free -h | grep 'Mem' | awk '{ print $3 }') | $(sensors gigabyte_wmi-virtual-0 -u | grep temp1_input | awk '{ print $2 }' | sed 's/\..*//g')C | $(date '+%Y-%m-%d %I:%M %p')"
+
+	sleep 60
+
+done

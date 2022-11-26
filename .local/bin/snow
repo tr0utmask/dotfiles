@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ "$(pidof xsnow)" ]
+then
+	kill "$(pidof xsnow)"
+else
+	setsid -f xsnow -notrees -nosanta -norudolf -nowind -wsnowdepth 50 -ssnowdepth 100
+fi

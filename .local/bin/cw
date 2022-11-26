@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ "$1" ]
+then
+	xsetroot -solid "#$(openssl rand -hex 6)"
+else
+	xsetroot -solid "$(shuf -n 1 ~/.local/share/colors.txt)"
+fi

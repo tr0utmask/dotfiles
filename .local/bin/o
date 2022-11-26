@@ -1,0 +1,16 @@
+#!/bin/sh
+
+[ "$1" ] || exit 1
+
+case "$1" in
+	*mkv|*webm|*mp4|*mov|*avi*|*youtu.be*|*youtube.com*|*yewtu.be*)
+		setsid -f mpv -quiet "$1" ;;
+	*png|*jpg|*jpe|*jpeg|*gif)
+		setsid -f feh "$1" ;;
+	*mp3|*flac|*opus|*wav|*aac|*ogg)
+		setsid -f mpv --no-video "$1" ;;
+	*pdf)
+		setsid -f mupdf "$1" ;;
+	*)
+		vim "$1"
+esac

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+notify-send "Now playing:" "$(cat ~/.config/Cider/Plugins/gh_525515699/dist/title.txt) by $(cat ~/.config/Cider/Plugins/gh_525515699/dist/artist.txt)"

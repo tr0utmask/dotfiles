@@ -1,0 +1,18 @@
+#!/bin/sh
+
+[ "$1" ] || exit 1
+
+archive="$(readlink -f "$*")"
+
+case "$archive" in
+	*.tar.bz2|*.tbz2) tar xvjf "$archive" ;;
+	*.tar.xz|*.tgz) tar -xf "$archive" ;;
+	*.tar.gz) tar xvzf "$archive" ;;
+	*.rar) unrar x -ad "$archive" ;;
+	*.gz) gunzip "$archive" ;;
+	*.bz2) bzip2 -vd "$archive" ;;
+	*.tar) tar xvf "$archive" ;;
+	*.zip) unzip "$archive" ;;
+	*.7z) 7z x "$archive" ;;
+	*) echo "Unknown archive method." ;;
+esac

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+while :
+do
+
+	xsetroot -name "$(pulsemixer --get-volume | awk '{ print $1 }')dB | $(cat /sys/class/power_supply/BAT0/capacity)% | $(($(cat /sys/bus/cpu/devices/cpu0/cpufreq/scaling_max_freq)/1000)) MHz | $(free -h | grep 'Mem' | awk '{ print $3 }') | $(sensors acpitz-acpi-0 -u | grep temp1_input | awk '{ print $2 }' | sed 's/\..*//g')C | $(date '+%Y-%m-%d %I:%M %p')"
+
+	sleep 60
+
+done

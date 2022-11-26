@@ -1,0 +1,8 @@
+#!/bin/sh
+
+printf "Commit message: "
+read -r commitmessage
+
+git add -A
+git commit -m "$commitmessage"
+git push -u origin master

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+[ "$1" ] || exit 1
+
+if grep -q "444444" ~/.local/src/dwm/config.h
+then
+	bg="#333333"
+else
+	bg="#AAAAAA"
+fi
+
+case "$1" in
+	c)
+		feh --no-fehbg --image-bg "$bg" --bg-center "$2" ;;
+	f)
+		feh --no-fehbg --image-bg "$bg" --bg-fill "$2" ;;
+	t)
+		feh --no-fehbg --image-bg "$bg" --bg-tile "$2" ;;
+	m)
+		feh --no-fehbg --image-bg "$bg" --bg-max "$2" ;;
+	*)
+		exit ;;
+esac

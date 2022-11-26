@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[ "$1" ] || exit 1
+
+wget -qO - "https://www.dictionary.com/browse/$1" | grep -oP '(?<=<meta name="description" content=").*(?=See more.)' | sed "s/.*definition,/$1:/" | while read -r OUTPUT; do notify-send -t 0 "$OUTPUT"; done
