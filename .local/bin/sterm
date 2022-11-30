@@ -2,4 +2,4 @@
 
 fc-list | grep "Shinonome Gothic" || fc-cache -f
 
-setsid -f urxvt -fn "xft:Shinonome Gothic" -fb "xft:Shinonome Gothic" -fi "xft:Shinonome Gothic" -fbi "xft:Shinonome Gothic" -bg "#000000" -fg "#ffffff" -cr "#ffffff"
+setsid -f urxvt -letsp 0 -fn "xft:Shinonome Gothic" -fb "xft:Shinonome Gothic" -fi "xft:Shinonome Gothic" -fbi "xft:Shinonome Gothic" -bg "#000000" -fg "#ffffff" -cr "#ffffff"
